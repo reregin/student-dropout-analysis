@@ -1,0 +1,19 @@
+{
+  "accuracy": 0.7197740112994351,
+  "macro_f1": 0.6339344817711109,
+  "balanced_accuracy": 0.6300765023467497,
+  "macro_roc_auc_ovr": 0.856276198156749,
+  "multiclass_log_loss": 0.6599345397667312,
+  "multiclass_brier_score": 0.372279161461226,
+  "dropout_class_recall_argmax": 0.704225352112676,
+  "dropout_class_precision_argmax": 0.7380073800738007,
+  "dropout_screening_threshold": 0.14690601245499665,
+  "dropout_screening_recall": 0.9049295774647887,
+  "dropout_screening_precision": 0.5376569037656904,
+  "dropout_screening_f2": 0.7961586121437423,
+  "dropout_screening_specificity": 0.632279534109817,
+  "tn": 380,
+  "fp": 221,
+  "fn": 27,
+  "tp": 257
+}

@@ -1,0 +1,5 @@
+candidate,checkpoint,model,feature_count,cv_macro_f1_mean,cv_macro_f1_std,cv_balanced_accuracy_mean,cv_dropout_recall_mean
+First-semester monitoring | Balanced random forest,First-semester monitoring,Balanced random forest,17,0.6825097930300442,0.03070500182341826,0.6805198724551115,0.703586057655151
+First-semester monitoring | Class-weighted logistic regression,First-semester monitoring,Class-weighted logistic regression,17,0.679348838581519,0.022637201238249225,0.6858589910042712,0.6877270268181468
+Enrollment baseline | Balanced random forest,Enrollment baseline,Balanced random forest,11,0.5556901358496047,0.011395663022328617,0.5570242109163476,0.5663575237653605
+Enrollment baseline | Class-weighted logistic regression,Enrollment baseline,Class-weighted logistic regression,11,0.5476862393098274,0.014990121368717897,0.5557315087978443,0.5302766828966691

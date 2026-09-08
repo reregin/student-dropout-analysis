@@ -1,0 +1,218 @@
+{
+  "model_name": "Balanced random forest",
+  "checkpoint": "First-semester monitoring",
+  "feature_columns": [
+    "Application_mode",
+    "Application_order",
+    "Course",
+    "Daytime_evening_attendance",
+    "Previous_qualification",
+    "Previous_qualification_grade",
+    "Admission_grade",
+    "Displaced",
+    "Debtor",
+    "Tuition_fees_up_to_date",
+    "Scholarship_holder",
+    "Curricular_units_1st_sem_credited",
+    "Curricular_units_1st_sem_enrolled",
+    "Curricular_units_1st_sem_evaluations",
+    "Curricular_units_1st_sem_approved",
+    "Curricular_units_1st_sem_grade",
+    "Curricular_units_1st_sem_without_evaluations"
+  ],
+  "categorical_features": [
+    "Application_mode",
+    "Course",
+    "Daytime_evening_attendance",
+    "Previous_qualification",
+    "Displaced",
+    "Debtor",
+    "Tuition_fees_up_to_date",
+    "Scholarship_holder"
+  ],
+  "numeric_features": [
+    "Application_order",
+    "Previous_qualification_grade",
+    "Admission_grade",
+    "Curricular_units_1st_sem_credited",
+    "Curricular_units_1st_sem_enrolled",
+    "Curricular_units_1st_sem_evaluations",
+    "Curricular_units_1st_sem_approved",
+    "Curricular_units_1st_sem_grade",
+    "Curricular_units_1st_sem_without_evaluations"
+  ],
+  "class_order": [
+    "Dropout",
+    "Enrolled",
+    "Graduate"
+  ],
+  "dropout_threshold": 0.14690601245499665,
+  "input_options": {
+    "Application_mode": [
+      1,
+      2,
+      5,
+      7,
+      10,
+      15,
+      16,
+      17,
+      18,
+      26,
+      27,
+      39,
+      42,
+      43,
+      44,
+      51,
+      53,
+      57
+    ],
+    "Course": [
+      33,
+      171,
+      8014,
+      9003,
+      9070,
+      9085,
+      9119,
+      9130,
+      9147,
+      9238,
+      9254,
+      9500,
+      9556,
+      9670,
+      9773,
+      9853,
+      9991
+    ],
+    "Daytime_evening_attendance": [
+      0,
+      1
+    ],
+    "Previous_qualification": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      9,
+      10,
+      12,
+      14,
+      15,
+      19,
+      38,
+      39,
+      40,
+      42,
+      43
+    ],
+    "Displaced": [
+      0,
+      1
+    ],
+    "Debtor": [
+      0,
+      1
+    ],
+    "Tuition_fees_up_to_date": [
+      0,
+      1
+    ],
+    "Scholarship_holder": [
+      0,
+      1
+    ]
+  },
+  "input_defaults": {
+    "Application_mode": 1,
+    "Application_order": 1.0,
+    "Course": 9500,
+    "Daytime_evening_attendance": 1,
+    "Previous_qualification": 1,
+    "Previous_qualification_grade": 133.1,
+    "Admission_grade": 126.1,
+    "Displaced": 1,
+    "Debtor": 0,
+    "Tuition_fees_up_to_date": 1,
+    "Scholarship_holder": 0,
+    "Curricular_units_1st_sem_credited": 0.0,
+    "Curricular_units_1st_sem_enrolled": 6.0,
+    "Curricular_units_1st_sem_evaluations": 8.0,
+    "Curricular_units_1st_sem_approved": 5.0,
+    "Curricular_units_1st_sem_grade": 12.285714285714286,
+    "Curricular_units_1st_sem_without_evaluations": 0.0
+  },
+  "input_ranges": {
+    "Application_order": {
+      "minimum": 0.0,
+      "maximum": 9.0
+    },
+    "Previous_qualification_grade": {
+      "minimum": 95.0,
+      "maximum": 190.0
+    },
+    "Admission_grade": {
+      "minimum": 95.0,
+      "maximum": 190.0
+    },
+    "Curricular_units_1st_sem_credited": {
+      "minimum": 0.0,
+      "maximum": 20.0
+    },
+    "Curricular_units_1st_sem_enrolled": {
+      "minimum": 0.0,
+      "maximum": 26.0
+    },
+    "Curricular_units_1st_sem_evaluations": {
+      "minimum": 0.0,
+      "maximum": 45.0
+    },
+    "Curricular_units_1st_sem_approved": {
+      "minimum": 0.0,
+      "maximum": 26.0
+    },
+    "Curricular_units_1st_sem_grade": {
+      "minimum": 0.0,
+      "maximum": 18.875
+    },
+    "Curricular_units_1st_sem_without_evaluations": {
+      "minimum": 0.0,
+      "maximum": 12.0
+    }
+  },
+  "intended_use": "Prioritize supportive student outreach with human review",
+  "prohibited_use": "No punitive, exclusionary, or fully automated academic decisions",
+  "training_rows_final": 4424,
+  "development_rows": 3539,
+  "holdout_rows_used_for_evaluation": 885,
+  "holdout_metrics": {
+    "accuracy": 0.7197740112994351,
+    "macro_f1": 0.6339344817711109,
+    "balanced_accuracy": 0.6300765023467497,
+    "macro_roc_auc_ovr": 0.856276198156749,
+    "multiclass_log_loss": 0.6599345397667312,
+    "multiclass_brier_score": 0.372279161461226,
+    "dropout_class_recall_argmax": 0.704225352112676,
+    "dropout_class_precision_argmax": 0.7380073800738007,
+    "dropout_screening_threshold": 0.14690601245499665,
+    "dropout_screening_recall": 0.9049295774647887,
+    "dropout_screening_precision": 0.5376569037656904,
+    "dropout_screening_f2": 0.7961586121437423,
+    "dropout_screening_specificity": 0.632279534109817,
+    "tn": 380,
+    "fp": 221,
+    "fn": 27,
+    "tp": 257
+  },
+  "versions": {
+    "python": "3.10.11",
+    "numpy": "2.2.6",
+    "pandas": "2.3.3",
+    "scikit_learn": "1.7.2",
+    "joblib": "1.5.3"
+  }
+}
