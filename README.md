@@ -10,7 +10,7 @@ Proyek ini menganalisis riwayat hasil studi mahasiswa, mengidentifikasi faktor d
 
 ## Permasalahan bisnis
 
-Jaya Jaya Institut perlu mengidentifikasi sedini mungkin mahasiswa yang berpotensi tidak menyelesaikan studi agar dukungan yang sesuai dapat diberikan. Dalam dataset yang tersedia, **1.421 dari 4.424 mahasiswa (32,1%)** memiliki status *Dropout*. Oleh karena itu, solusi ini menggabungkan pemantauan deskriptif dengan model penyaringan yang sengaja mengutamakan *recall*.
+Jaya Jaya Institut menghadapi jumlah mahasiswa dropout yang tinggi. Institusi perlu mengidentifikasi sedini mungkin mahasiswa yang berpotensi tidak menyelesaikan studi agar dukungan akademik, administratif, dan finansial yang sesuai dapat diberikan. Proyek ini menggabungkan analisis deskriptif, dashboard pemantauan, dan model penyaringan yang mengutamakan *recall*. Besaran masalah dan pola pada data dibahas setelah tahap data understanding dan analisis dilakukan.
 
 Skor yang dihasilkan merupakan pendukung keputusan untuk intervensi yang bermanfaat. Skor tidak boleh digunakan untuk pemberian sanksi, proses penerimaan, pembatasan akses pembayaran kuliah, penentuan kelayakan akademik, ataupun keputusan berdampak tinggi lainnya secara otomatis.
 
@@ -23,6 +23,9 @@ submission/
 ├── data/
 │   ├── data.csv
 │   ├── student_prepared.csv
+│   ├── modeling_students.csv
+│   ├── enrolled_students_future_scoring.csv
+│   ├── enrolled_student_predictions.csv
 │   ├── dashboard_student_data.csv
 │   └── berkas CSV ringkasan analisis
 ├── model/
@@ -35,6 +38,8 @@ submission/
 ├── reregin-dashboard.png
 └── requirements.txt
 ```
+
+`reregin-dashboard.png` berisi tangkapan layar dashboard yang telah dibuat. Video bersifat opsional dan sengaja tidak disertakan dalam paket ini.
 
 ## Menjalankan ulang analisis
 
@@ -51,21 +56,23 @@ Notebook yang disertakan telah dijalankan dari awal hingga akhir. Isinya mendoku
 
 ## Solusi machine learning
 
-Solusi yang diimplementasikan adalah *balanced random forest* terkalibrasi yang dilatih pada **titik pemantauan semester pertama** dengan 17 input operasional. Model dipilih melalui validasi silang terstratifikasi lima lipatan dengan membandingkan kandidat berbasis data pendaftaran dan semester pertama. Proses pemilihan akhir tidak melihat data *holdout*.
+Solusi yang diimplementasikan adalah model klasifikasi biner terkalibrasi untuk memprediksi **Dropout (`1`) atau Graduate (`0`)** pada titik pemantauan semester pertama dengan 17 input operasional. Data training hanya mencakup 3.630 mahasiswa dengan outcome akhir: 1.421 Dropout dan 2.209 Graduate. Sebanyak 794 mahasiswa berstatus Enrolled dipisahkan sebelum pembagian data dan hanya digunakan untuk prediksi masa mendatang.
+
+Validasi silang terstratifikasi lima lipatan memilih *class-weighted logistic regression* dengan membandingkan kandidat berbasis data pendaftaran dan semester pertama. Proses pemilihan model dan threshold tidak melihat data *holdout*.
 
 Kinerja pada 20% data *holdout* yang belum pernah digunakan:
 
 | Metrik | Hasil |
 |---|---:|
-| Akurasi | 0,720 |
-| Macro F1 | 0,634 |
-| Balanced accuracy | 0,630 |
-| Macro ROC-AUC (OvR) | 0,856 |
-| Recall penyaringan dropout | 0,905 |
-| Precision penyaringan dropout | 0,538 |
-| F2 penyaringan dropout | 0,796 |
+| Akurasi pada threshold screening | 0,825 |
+| Precision Dropout | 0,712 |
+| Recall Dropout | 0,930 |
+| F1 Dropout | 0,806 |
+| Balanced accuracy | 0,844 |
+| ROC-AUC | 0,949 |
+| F2 penyaringan Dropout | 0,876 |
 
-Ambang batas penyaringan (`0,147`) ditentukan hanya menggunakan prediksi *out-of-fold* dari data latih untuk mengutamakan *recall* dropout. Setiap peringatan tetap memerlukan peninjauan manusia. Atribut identitas yang dilindungi atau sensitif, latar belakang keluarga, indikator makroekonomi, dan hasil semester kedua tidak digunakan dalam fitur model yang diimplementasikan.
+Ambang batas penyaringan (`0,217`) ditentukan hanya menggunakan prediksi *out-of-fold* dari data latih untuk mengutamakan *recall* dropout. Setiap peringatan tetap memerlukan peninjauan manusia. Atribut identitas yang dilindungi atau sensitif, latar belakang keluarga, indikator makroekonomi, dan hasil semester kedua tidak digunakan dalam fitur model yang diimplementasikan.
 
 ### Menjalankan prototipe Streamlit secara lokal
 
@@ -73,7 +80,7 @@ Ambang batas penyaringan (`0,147`) ditentukan hanya menggunakan prediksi *out-of
 streamlit run app.py
 ```
 
-Buka alamat lokal yang ditampilkan Streamlit, lengkapi 17 input, lalu pilih **Assess student status**. Aplikasi akan menampilkan probabilitas untuk ketiga kelas, keputusan penyaringan dropout, dan saran dukungan yang sesuai dengan konteks.
+Buka alamat lokal yang ditampilkan Streamlit, lengkapi 17 input, lalu pilih **Assess student status**. Aplikasi akan menampilkan probabilitas Dropout dan Graduate, keputusan penyaringan dropout, dan saran dukungan yang sesuai dengan konteks.
 
 ### Streamlit Community Cloud
 

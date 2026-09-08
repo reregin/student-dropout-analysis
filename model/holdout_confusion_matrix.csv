@@ -1,4 +1,3 @@
-,Predicted Dropout,Predicted Enrolled,Predicted Graduate
-Actual Dropout,200,36,48
-Actual Enrolled,50,49,60
-Actual Graduate,21,33,388
+,Predicted Graduate,Predicted Dropout
+Actual Graduate,335,107
+Actual Dropout,20,264

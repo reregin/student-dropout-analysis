@@ -1,5 +1,5 @@
-candidate,checkpoint,model,feature_count,cv_macro_f1_mean,cv_macro_f1_std,cv_balanced_accuracy_mean,cv_dropout_recall_mean
-First-semester monitoring | Balanced random forest,First-semester monitoring,Balanced random forest,17,0.6825097930300442,0.03070500182341826,0.6805198724551115,0.703586057655151
-First-semester monitoring | Class-weighted logistic regression,First-semester monitoring,Class-weighted logistic regression,17,0.679348838581519,0.022637201238249225,0.6858589910042712,0.6877270268181468
-Enrollment baseline | Balanced random forest,Enrollment baseline,Balanced random forest,11,0.5556901358496047,0.011395663022328617,0.5570242109163476,0.5663575237653605
-Enrollment baseline | Class-weighted logistic regression,Enrollment baseline,Class-weighted logistic regression,11,0.5476862393098274,0.014990121368717897,0.5557315087978443,0.5302766828966691
+candidate,checkpoint,model,feature_count,cv_f1_mean,cv_f1_std,cv_roc_auc_mean,cv_balanced_accuracy_mean,cv_dropout_recall_mean
+First-semester monitoring | Class-weighted logistic regression,First-semester monitoring,Class-weighted logistic regression,17,0.8471941605408111,0.016987856193145003,0.9309370607904311,0.8745619849978562,0.8487286498183785
+First-semester monitoring | Balanced random forest,First-semester monitoring,Balanced random forest,17,0.8408345189587335,0.017431254534103997,0.929079907669627,0.867921261372059,0.8162029523147074
+Enrollment baseline | Balanced random forest,Enrollment baseline,Balanced random forest,11,0.706624787401144,0.018833702743194545,0.8387287958586013,0.7590168720820459,0.7053674936239276
+Enrollment baseline | Class-weighted logistic regression,Enrollment baseline,Class-weighted logistic regression,11,0.705271736225988,0.025825054626147002,0.8396097054357758,0.7563420376015035,0.7220805317257902

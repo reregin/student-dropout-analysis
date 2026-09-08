@@ -1,5 +1,5 @@
 {
-  "model_name": "Balanced random forest",
+  "model_name": "Class-weighted logistic regression",
   "checkpoint": "First-semester monitoring",
   "feature_columns": [
     "Application_mode",
@@ -42,11 +42,14 @@
     "Curricular_units_1st_sem_without_evaluations"
   ],
   "class_order": [
-    "Dropout",
-    "Enrolled",
-    "Graduate"
+    0,
+    1
   ],
-  "dropout_threshold": 0.14690601245499665,
+  "class_labels": {
+    "0": "Graduate",
+    "1": "Dropout"
+  },
+  "dropout_threshold": 0.2167876862476769,
   "input_options": {
     "Application_mode": [
       1,
@@ -186,27 +189,30 @@
   },
   "intended_use": "Prioritize supportive student outreach with human review",
   "prohibited_use": "No punitive, exclusionary, or fully automated academic decisions",
-  "training_rows_final": 4424,
-  "development_rows": 3539,
-  "holdout_rows_used_for_evaluation": 885,
+  "training_rows_final": 3630,
+  "excluded_enrolled_rows": 794,
+  "development_rows": 2904,
+  "holdout_rows_used_for_evaluation": 726,
   "holdout_metrics": {
-    "accuracy": 0.7197740112994351,
-    "macro_f1": 0.6339344817711109,
-    "balanced_accuracy": 0.6300765023467497,
-    "macro_roc_auc_ovr": 0.856276198156749,
-    "multiclass_log_loss": 0.6599345397667312,
-    "multiclass_brier_score": 0.372279161461226,
-    "dropout_class_recall_argmax": 0.704225352112676,
-    "dropout_class_precision_argmax": 0.7380073800738007,
-    "dropout_screening_threshold": 0.14690601245499665,
-    "dropout_screening_recall": 0.9049295774647887,
-    "dropout_screening_precision": 0.5376569037656904,
-    "dropout_screening_f2": 0.7961586121437423,
-    "dropout_screening_specificity": 0.632279534109817,
-    "tn": 380,
-    "fp": 221,
-    "fn": 27,
-    "tp": 257
+    "accuracy": 0.8250688705234159,
+    "precision": 0.7115902964959568,
+    "recall": 0.9295774647887324,
+    "f1": 0.8061068702290076,
+    "balanced_accuracy": 0.8437480084124658,
+    "roc_auc": 0.949326046778408,
+    "binary_log_loss": 0.2678994204614342,
+    "brier_score": 0.07921637486804359,
+    "default_threshold_accuracy": 0.8939393939393939,
+    "default_threshold_f1": 0.8632326820603907,
+    "dropout_screening_threshold": 0.2167876862476769,
+    "dropout_screening_recall": 0.9295774647887324,
+    "dropout_screening_precision": 0.7115902964959568,
+    "dropout_screening_f2": 0.875912408759124,
+    "dropout_screening_specificity": 0.7579185520361991,
+    "tn": 335,
+    "fp": 107,
+    "fn": 20,
+    "tp": 264
   },
   "versions": {
     "python": "3.10.11",

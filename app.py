@@ -41,7 +41,7 @@ QUALIFICATION_LABELS = {
 }
 BINARY_LABELS = {0: "No", 1: "Yes"}
 ATTENDANCE_LABELS = {0: "Evening", 1: "Daytime"}
-STATUS_COLORS = {"Dropout": "#C94B5B", "Enrolled": "#D39B2A", "Graduate": "#23877A"}
+STATUS_COLORS = {"Dropout": "#C94B5B", "Graduate": "#23877A"}
 
 
 st.set_page_config(
@@ -86,11 +86,12 @@ if not MODEL_PATH.exists():
 artifact = load_artifact(MODEL_PATH)
 
 st.title("Student Early-Warning Prototype")
-st.caption("Jaya Jaya Institut · Three-class status model · Submission by reregin")
+st.caption("Jaya Jaya Institut · Binary Dropout-vs-Graduate model · Submission by reregin")
 st.markdown(
     """
     <div class="support-note">
-    This prototype prioritizes supportive outreach after semester one. It does not
+    This prototype scores currently enrolled students after semester one using a
+    model trained only on historical Dropout and Graduate outcomes. It does not
     determine sanctions, admission, tuition access, or academic eligibility.
     </div>
     """,
@@ -105,7 +106,11 @@ with st.sidebar:
     st.write(f"**Dropout alert threshold:** {artifact['dropout_threshold']:.3f}")
     st.divider()
     st.caption(
-        "The model excludes gender, nationality, marital status, age, international "
+        "Training uses only students with resolved Dropout or Graduate outcomes. "
+        "Students still Enrolled were excluded from training and reserved for future scoring. "
+        "Students whose recorded status was Enrolled were excluded from training "
+        "and reserved for future scoring. The model also excludes gender, "
+        "nationality, marital status, age, international "
         "status, special needs, family background, macroeconomic indicators, and "
         "all second-semester performance fields."
     )
@@ -216,9 +221,9 @@ if submitted:
         probabilities = artifact["model"].predict_proba(input_row)[0]
         classes = list(artifact["model"].classes_)
         probability_map = dict(zip(classes, probabilities))
-        predicted_status = classes[int(probabilities.argmax())]
-        dropout_probability = float(probability_map["Dropout"])
+        dropout_probability = float(probability_map[1])
         alert = dropout_probability >= artifact["dropout_threshold"]
+        predicted_status = "Dropout" if alert else "Graduate"
 
         st.divider()
         st.subheader("Assessment result")
@@ -228,8 +233,8 @@ if submitted:
         review_col.metric("Support review", "Prioritize" if alert else "Routine monitoring")
 
         probability_table = pd.DataFrame({
-            "Status": classes,
-            "Estimated probability": [probability_map[value] for value in classes],
+            "Status": ["Graduate", "Dropout"],
+            "Estimated probability": [probability_map[0], probability_map[1]],
         })
         chart_col, table_col = st.columns([1.4, 1])
         with chart_col:
